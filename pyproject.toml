@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "sleuth-sec"
-version = "0.4.1"
+version = "0.4.2"
 description = "Instant binary triage: is this file safe? Verdict in 10 seconds."
 readme = "README.md"
 license = "MIT"

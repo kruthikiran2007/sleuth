@@ -5,4 +5,4 @@ it reads bytes from disk, parses headers, extracts strings, and matches
 patterns. Nothing is run, nothing is loaded into memory as code.
 """
 
-__version__ = "0.4.1"
+__version__ = "0.4.2"
