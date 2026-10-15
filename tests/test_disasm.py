@@ -94,3 +94,28 @@ def test_graceful_when_capstone_missing(monkeypatch):
     assert "capstone" in result["reason"]
     with pytest.raises(RuntimeError):
         disasm.disassemble_bytes(b"\x90", "x86", 64)
+
+
+def test_disassemble_file_elf_entry():
+    # Regression: pyelftools>=0.30 returns e_machine as the string
+    # 'EM_X86_64', which missed the int-keyed _ELF_MACHINES lookup and made
+    # disassemble_file report every x86-64 ELF as "unsupported architecture".
+    import shutil
+
+    true_bin = shutil.which("true")
+    if not true_bin:
+        pytest.skip("no 'true' binary on this platform")
+    result = disasm.disassemble_file(true_bin, "elf", count=8)
+    assert result["available"] is True
+    assert result["arch"] == "x86-64"
+    assert result["count"] >= 1
+    assert result["instructions"][0]["mnemonic"]
+
+
+def test_elf_arch_accepts_int_and_string():
+    assert disasm._elf_arch(62) == ("x86", 64)
+    assert disasm._elf_arch(3) == ("x86", 32)
+    assert disasm._elf_arch("EM_X86_64") == ("x86", 64)
+    assert disasm._elf_arch("EM_386") == ("x86", 32)
+    assert disasm._elf_arch("EM_ARM") is None
+    assert disasm._elf_arch(40) is None

@@ -29,6 +29,18 @@ _ELF_MACHINES = {
     62: ("x86", 64),       # EM_X86_64
 }
 
+# pyelftools>=0.30 returns e_machine as an 'EM_*' string ('EM_X86_64'),
+# older versions return the int (62). Accept both, or every ELF lookup
+# silently misses and disassembly reports "unsupported architecture".
+_ELF_MACHINE_STRINGS = {"EM_386": 3, "EM_X86_64": 62}
+
+
+def _elf_arch(machine):
+    """Map a pyelftools e_machine value to (arch, mode), or None."""
+    if isinstance(machine, str):
+        machine = _ELF_MACHINE_STRINGS.get(machine)
+    return _ELF_MACHINES.get(machine)
+
 _EXCERPT_BYTES = 4096  # bytes read from the entry point region
 WEAK_POINTS = 3
 
@@ -58,7 +70,7 @@ def _entry_region_elf(data):
         from io import BytesIO
 
         elf = ELFFile(BytesIO(data))
-        arch = _ELF_MACHINES.get(elf.header.e_machine)
+        arch = _elf_arch(elf.header.e_machine)
         if arch is None:
             return None
         entry = elf.header.e_entry
