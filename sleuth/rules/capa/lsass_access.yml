@@ -1,0 +1,13 @@
+rule:
+  meta:
+    name: access LSASS process memory
+    namespace: sleuth/credential-access
+    att&ck:
+      - Credential Access::OS Credential Dumping::LSASS Memory [T1003.001]
+    scopes:
+      static: file
+      dynamic: unsupported
+  features:
+    - and:
+      - import: OpenProcess
+      - string: "lsass.exe"

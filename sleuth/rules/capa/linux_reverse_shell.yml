@@ -1,0 +1,14 @@
+rule:
+  meta:
+    name: Linux reverse shell primitives
+    namespace: sleuth/c2
+    att&ck:
+      - Execution::Command and Scripting Interpreter::Unix Shell [T1059.004]
+    scopes:
+      static: file
+      dynamic: unsupported
+  features:
+    - and:
+      - import: socket
+      - import: connect
+      - string: "/bin/sh"

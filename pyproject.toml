@@ -1,0 +1,54 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sleuth-sec"
+version = "0.4.1"
+description = "Instant binary triage: is this file safe? Verdict in 10 seconds."
+readme = "README.md"
+license = "MIT"
+authors = [{ name = "kruthikiran2007" }]
+keywords = ["security", "malware-analysis", "triage", "yara", "reverse-engineering", "threat-intel"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Information Technology",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Security",
+]
+requires-python = ">=3.10"
+# Light core: pip install sleuth-sec stays fast and installs everywhere.
+# YARA + capa live in the [full] extra. Everything degrades gracefully
+# if an optional engine is missing.
+dependencies = [
+    "pefile",
+    "pyelftools",
+    "capstone",
+]
+
+[project.optional-dependencies]
+# Everything: core + YARA scanning + heavyweight capa (MITRE ATT&CK
+# capability detection). Install only if you want the heavy engines:
+# flare-capa pulls ~40 packages, and yara-python has no prebuilt wheel
+# for the newest Pythons yet.
+full = ["flare-capa", "yara-python>=4.3"]
+# MCP server for AI assistants (Claude Code, Cursor, ...).
+mcp = ["mcp<2"]
+
+[project.urls]
+Homepage = "https://github.com/kruthikiran2007/sleuth"
+Repository = "https://github.com/kruthikiran2007/sleuth"
+Issues = "https://github.com/kruthikiran2007/sleuth/issues"
+
+[project.scripts]
+sleuth = "sleuth.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["sleuth*"]
+
+[tool.setuptools.package-data]
+sleuth = ["rules/*.yar", "rules/capa/*.yml"]

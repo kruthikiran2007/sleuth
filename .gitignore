@@ -1,0 +1,14 @@
+# Python / project junk — never commit these
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+dist/
+build/
+*.egg-info/
+# OS / editor noise
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

@@ -1,0 +1,14 @@
+rule:
+  meta:
+    name: capture keystrokes (keylogging)
+    namespace: sleuth/collection
+    att&ck:
+      - Collection::Input Capture::Keylogging [T1056.001]
+    scopes:
+      static: file
+      dynamic: unsupported
+  features:
+    - or:
+      - import: GetAsyncKeyState
+      - import: SetWindowsHookExA
+      - import: SetWindowsHookExW

@@ -1,0 +1,11 @@
+rule:
+  meta:
+    name: Linux fileless execution via memfd
+    namespace: sleuth/evasion
+    att&ck:
+      - Defense Evasion::Reflective Code Loading [T1620]
+    scopes:
+      static: file
+      dynamic: unsupported
+  features:
+    - import: memfd_create

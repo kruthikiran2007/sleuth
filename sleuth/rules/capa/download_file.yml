@@ -1,0 +1,13 @@
+rule:
+  meta:
+    name: download file via WinINet/URLmon
+    namespace: sleuth/c2
+    att&ck:
+      - Command and Control::Ingress Tool Transfer [T1105]
+    scopes:
+      static: file
+      dynamic: unsupported
+  features:
+    - or:
+      - import: URLDownloadToFileA
+      - import: URLDownloadToFileW

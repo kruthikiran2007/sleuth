@@ -1,0 +1,11 @@
+rule:
+  meta:
+    name: enumerate processes (discovery)
+    namespace: sleuth/discovery
+    att&ck:
+      - Discovery::Process Discovery [T1057]
+    scopes:
+      static: file
+      dynamic: unsupported
+  features:
+    - import: CreateToolhelp32Snapshot

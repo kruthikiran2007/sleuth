@@ -1,0 +1,13 @@
+rule:
+  meta:
+    name: capture screenshot
+    namespace: sleuth/collection
+    att&ck:
+      - Collection::Screen Capture [T1113]
+    scopes:
+      static: file
+      dynamic: unsupported
+  features:
+    - and:
+      - import: BitBlt
+      - import: GetDC

@@ -1,0 +1,11 @@
+rule:
+  meta:
+    name: Linux anti-debug via ptrace
+    namespace: sleuth/evasion
+    att&ck:
+      - Defense Evasion::Debugger Evasion [T1622]
+    scopes:
+      static: file
+      dynamic: unsupported
+  features:
+    - import: ptrace

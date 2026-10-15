@@ -1,0 +1,13 @@
+rule:
+  meta:
+    name: detect debugger (anti-analysis)
+    namespace: sleuth/evasion
+    att&ck:
+      - Defense Evasion::Debugger Evasion [T1622]
+    scopes:
+      static: file
+      dynamic: unsupported
+  features:
+    - or:
+      - import: IsDebuggerPresent
+      - import: CheckRemoteDebuggerPresent

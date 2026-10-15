@@ -1,0 +1,14 @@
+# Core (what `pip install sleuth-sec` installs — light and fast)
+pefile
+pyelftools
+capstone
+yara-python>=4.3
+# Dev/test
+pytest>=8.0
+
+# --- Optional (NOT installed by default) ---
+# pip install sleuth-sec[full]   -> adds: flare-capa   (heavy, ~40 packages;
+#                                    MITRE ATT&CK capability detection)
+# pip install sleuth-sec[mcp]    -> adds: mcp<2        (MCP server for AI
+#                                    assistants like Claude Code / Cursor)
+# Everything degrades gracefully when an optional engine is missing.

@@ -1,0 +1,13 @@
+rule:
+  meta:
+    name: inject remote thread (process injection)
+    namespace: sleuth/injection
+    att&ck:
+      - Defense Evasion::Process Injection [T1055]
+    scopes:
+      static: file
+      dynamic: unsupported
+  features:
+    - and:
+      - import: CreateRemoteThread
+      - import: WriteProcessMemory

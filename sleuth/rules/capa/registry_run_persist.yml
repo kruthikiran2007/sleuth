@@ -1,0 +1,15 @@
+rule:
+  meta:
+    name: persist via registry run key
+    namespace: sleuth/persistence
+    att&ck:
+      - Persistence::Boot or Logon Autostart Execution::Registry Run Keys [T1547.001]
+    scopes:
+      static: file
+      dynamic: unsupported
+  features:
+    - and:
+      - or:
+        - import: RegSetValueExA
+        - import: RegSetValueExW
+      - string: "Software\\Microsoft\\Windows\\CurrentVersion\\Run"

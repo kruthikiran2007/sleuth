@@ -1,0 +1,15 @@
+rule:
+  meta:
+    name: run encoded PowerShell command
+    namespace: sleuth/execution
+    att&ck:
+      - Execution::Command and Scripting Interpreter::PowerShell [T1059.001]
+    scopes:
+      static: file
+      dynamic: unsupported
+  features:
+    - and:
+      - string: "powershell"
+      - or:
+        - string: "-EncodedCommand"
+        - string: "-enc "
