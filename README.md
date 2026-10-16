@@ -23,6 +23,10 @@ $ python -m sleuth.cli analyze shady.exe
     [+15] [T1055 Process Injection] injects into remote process
 ```
 
+**🎬 Watch it in action** — 53-second demo, real runs and real verdicts:
+
+https://github.com/kruthikiran2007/sleuth/releases/download/v0.4.1/sleuth-demo.mp4
+
 ## Why Sleuth?
 
 | | Sleuth | Deep-RE tools (e.g. REA) | Online scanners |
